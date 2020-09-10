@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }))
- 
+var port = process.env.PORT || 3000
 // parse application/json
 app.use(bodyParser.json())
 
@@ -30,7 +30,7 @@ app.put('/usuario/:id', function(req,res){
         });
     
 
-app.listen(3000, ()=>{
+app.listen(port, ()=>{
     console.log("escuchando puerto 3000");
 
 });
