@@ -6,7 +6,7 @@ const app = express();
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 let urlBD;
-if(process.env.NODE_ENV ==='env'){
+if(process.env.NODE_ENV ==='dev'){
     urlBD ='mongodb://localhost:27017/cafe';
 }
 else{
@@ -17,7 +17,7 @@ var port = process.env.PORT || 3000
 // parse application/json
 app.use(bodyParser.json())
 
-app.use(require('../routes/usuario'));
+app.use(require('../routes/index'));
 
 app.listen(port, ()=>{
     console.log("escuchando puerto 3000");

@@ -1,8 +1,11 @@
 const express = require("express");
 const Usuario = require('../models/usuario');
 const bycript = require('bcrypt');
+
 const app = express();
-app.get('/usuario', function(req,res){
+const {validarToken,validarAdminRole} = require ('../server/midlewares/midlewares');
+
+app.get('/usuario',[validarToken], (req,res)=>{
     let desde = req.query.desde || 0;
     desde = Number(desde);
     let limite = req.query.limite || 5;
@@ -28,7 +31,7 @@ app.get('/usuario', function(req,res){
 
     });
     
-    app.post('/usuario', function(req,res){
+    app.post('/usuario',[validarToken,validarAdminRole], function(req,res){
         let body = req.body;
         let usuario = new Usuario({
             nombre: body.nombre,
@@ -52,7 +55,7 @@ app.get('/usuario', function(req,res){
         });
        
         });
-    app.put('/usuario/:id', function(req,res){
+    app.put('/usuario/:id',[validarToken,validarAdminRole], function(req,res){
         
         let id = req.params.id;
         let body  = req.body;
@@ -71,7 +74,7 @@ app.get('/usuario', function(req,res){
             });
         });
         });
-     app.delete('/usuario/:id', function(req,res){
+     app.delete('/usuario/:id', [validarToken,validarAdminRole],function(req,res){
       let id = req.params.id;
      let body = {estado: false};
      
