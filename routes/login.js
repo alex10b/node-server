@@ -2,7 +2,8 @@ const express = require("express");
 const app = express();
 const Usuario = require('../models/usuario');
 const bycript = require('bcrypt');
-const jwt = require ('jsonwebtoken') 
+const jwt = require ('jsonwebtoken');
+let seed = process.env.SEED | "este-es-el-seed-desarrollo";
 app.post('/login', (req,res)=>{
     let body = req.body;
     Usuario.findOne({email: body.email},(err,usuarioDb)=>{
@@ -26,7 +27,7 @@ if(!bycript.compareSync(body.password,usuarioDb.password)){
 }
 let token = jwt.sign({
     usuario: usuarioDb
-},'este-es-el-seed-desarrollo',{expiresIn: 60*60*24*30});
+},seed,{expiresIn: 60*60*24*30});
 res.json({
     ok: true,
     usuarioDb,
