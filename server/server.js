@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const path = require('path');
 const app = express();
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
@@ -12,6 +13,7 @@ if(process.env.NODE_ENV ==='dev'){
 else{
     urlBD = 'mongodb+srv://sa:hola12@cafe.9v89k.mongodb.net/cafe?retryWrites=true&w=majority';
 }
+app.use(express.static(path.resolve(__dirname, '../public')));
 app.use(bodyParser.urlencoded({ extended: false }))
 var port = process.env.PORT || 3000
 // parse application/json

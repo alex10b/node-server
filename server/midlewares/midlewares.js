@@ -1,4 +1,4 @@
-let seed = process.env.SEED | "este-es-el-seed-desarrollo";
+let seed = process.env.SEED || "este-es-el-seed-desarrollo";
 const jwt = require ('jsonwebtoken');
 const usuario = require('../../models/usuario');
 

@@ -20,7 +20,7 @@ password:{
     required: [true, 'la contraseña es requerida']
 },
 img: {
-    type: Number,
+    type: String,
     required: false
 },
 role:{
